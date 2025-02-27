@@ -1,5 +1,7 @@
 # MacOS Directory Config Files
 .DS_Store
+category.csv
+subcategory.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
