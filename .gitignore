@@ -1,12 +1,6 @@
 # MacOS Directory Config Files
 .DS_Store
 
-# CSV Files
-category.csv
-subcategory.csv
-campaign.csv
-contacts.csv
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
