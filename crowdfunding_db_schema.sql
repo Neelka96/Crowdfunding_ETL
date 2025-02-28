@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS contacts CASCADE;
-DROP TABLE IF EXISTS categories CASCADE;
-DROP TABLE IF EXISTS subcategories CASCADE;
+DROP TABLE IF EXISTS category CASCADE;
+DROP TABLE IF EXISTS subcategory CASCADE;
 DROP TABLE IF EXISTS campaign CASCADE;
 
 CREATE TABLE contacts (
@@ -28,20 +28,20 @@ CREATE TABLE subcategory (
 
 CREATE TABLE campaign (
     cf_id INT
-    ,contact_id INT
+    ,contact_id INT 
     ,company_name VARCHAR(33) NOT NULL
     ,"description" VARCHAR(53)
-    ,goal DEC NOT NULL
-    ,pledged DEC NOT NULL
+    ,goal FLOAT NOT NULL
+    ,pledged FLOAT NOT NULL
     ,outcome VARCHAR(10) NOT NULL
     ,backers_count INT NOT NULL
     ,country CHAR(2) NOT NULL
     ,currency CHAR(3) NOT NULL
     ,launch_date CHAR(10) NOT NULL
     ,end_date CHAR(10)
-    ,category_id CHAR(4)
-    ,subcategory_id VARCHAR(8)
-    
+    ,category_id CHAR(4) 
+    ,subcategory_id VARCHAR(8) 
+
     ,CONSTRAINT pk_cf_id PRIMARY KEY (cf_id)
     ,CONSTRAINT fk_contact_id FOREIGN KEY (contact_id) REFERENCES contacts(contact_id)
     ,CONSTRAINT fk_cat_id FOREIGN KEY (category_id) REFERENCES category(category_id)
