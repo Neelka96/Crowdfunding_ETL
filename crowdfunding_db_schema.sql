@@ -31,8 +31,8 @@ CREATE TABLE campaign (
     ,contact_id INT 
     ,company_name VARCHAR(33) NOT NULL
     ,"description" VARCHAR(53)
-    ,goal FLOAT NOT NULL
-    ,pledged FLOAT NOT NULL
+    ,goal DEC NOT NULL
+    ,pledged DEC NOT NULL
     ,outcome VARCHAR(10) NOT NULL
     ,backers_count INT NOT NULL
     ,country CHAR(2) NOT NULL
