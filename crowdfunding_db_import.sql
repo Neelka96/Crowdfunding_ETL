@@ -2,28 +2,28 @@
 
 -- (1)
 COPY
-    contacts
+    subcategory
 FROM
-    '/Users/neelagarwal/Projects/DataClassRepos/Crowdfunding_ETL/Resources/Outputs/contacts.csv'
+    '/Users/neelagarwal/Projects/DataClassRepos/Crowdfunding_ETL/Resources/Output/subcategory.csv'
 DELIMITER ',' CSV HEADER;
 
 -- (2)
 COPY
-    category
+    contacts
 FROM
-    '/Users/neelagarwal/Projects/DataClassRepos/Crowdfunding_ETL/Resources/Outputs/category.csv'
+    '/Users/neelagarwal/Projects/DataClassRepos/Crowdfunding_ETL/Resources/Output/contacts.csv'
 DELIMITER ',' CSV HEADER;
 
 -- (3)
 COPY
-    subcategory
+    category
 FROM
-    '/Users/neelagarwal/Projects/DataClassRepos/Crowdfunding_ETL/Resources/Outputs/subcategory.csv'
+    '/Users/neelagarwal/Projects/DataClassRepos/Crowdfunding_ETL/Resources/Output/category.csv'
 DELIMITER ',' CSV HEADER;
 
 -- (4)
 COPY
     campaign
 FROM
-    '/Users/neelagarwal/Projects/DataClassRepos/Crowdfunding_ETL/Resources/Outputs/campaign.csv'
+    '/Users/neelagarwal/Projects/DataClassRepos/Crowdfunding_ETL/Resources/Output/campaign.csv'
 DELIMITER ',' CSV HEADER;
