@@ -1,6 +1,9 @@
 # MacOS Directory Config Files
 .DS_Store
 
+# Helper Constraints File
+schema_constraints.sql
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
