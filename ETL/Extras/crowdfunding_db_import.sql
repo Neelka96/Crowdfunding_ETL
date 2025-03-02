@@ -1,5 +1,5 @@
 -- Local CSV POSIX Path from Drive
--- Copied and Pasted from schema_writer.ipynb safely
+-- Written from schema_writer.ipynb safely
 
 -- (1)
 COPY

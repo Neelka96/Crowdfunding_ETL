@@ -3,6 +3,8 @@
 
 # Helper Constraints File
 schema_constraints.sql
+TEST_autoSchema.sql
+TEST_autoImport.sql
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
