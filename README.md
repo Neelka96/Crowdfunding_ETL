@@ -2,7 +2,7 @@
 Data Viz Project 2
 
 VARCHAR's that rely more on user input/vary from person to person have been rounded up to ensure later data can be added to the db.
-company_name VARCHAR(40) # 33 --> 
+company_name VARCHAR(40) # 33 --> 40
 description VARCHAR(60) # 53 --> 60
 
 first_name VARCHAR(20) # 12 --> 20
