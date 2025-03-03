@@ -29,8 +29,9 @@ By:
 9. [ERD Overview](#erd-overview)
     - [Normalization](#normalization)
     - [Relationships](#relationships)
-10. [Usage Notes & Tips](#usage-notes--tips)
-11. [Credits & Citations](#credits--citations)
+10. [Limitations](#limitations)
+11. [Usage Notes & Tips](#usage-notes--tips)
+12. [Credits & Citations](#credits--citations)
 
 ---
 
@@ -318,6 +319,31 @@ For example:
 - `campaign.subcategory_id` → `subcategory.subcategory_id`
 
 [:arrow_up: Return to TOC](#table-of-contents)  
+
+---
+
+## Limitations
+
+- **Static Data Structure**:  
+    The current schema and CSV outputs are designed around the provided datasets. While precautions like rounding up `VARCHAR` lengths were taken, future datasets with unexpected structures, additional fields, or significantly longer strings may require manual updates to the schema and ETL process.
+
+- **Manual Schema Refinements**:  
+    Although the `schema_writer.ipynb` automates SQL generation, elements like primary keys, foreign keys, and certain constraints were applied manually or outside the automated process. Future iterations could integrate these features directly into the schema generator.
+
+- **Limited Data Validation**:  
+    The ETL process performs cleaning and transformation, but deeper validation (such as checking for duplicate records, malformed emails, or invalid date ranges) is minimal. Adding robust data validation steps could help ensure higher data quality.
+
+- **Static File Paths**:  
+    The generated import SQL file includes file paths that may need to be manually adjusted depending on the user's environment. This may limit portability across systems unless dynamic path handling is integrated.
+
+- **Regex Solution Not Integrated**:  
+    While an alternative regex-based contact parser was created, it remains outside the main workflow. Incorporating it as a selectable option within the ETL pipeline could provide flexibility for future datasets with more irregular formatting.
+
+- **Scalability**:  
+    This project was developed with relatively small sample datasets. Performance with much larger datasets (millions of records) has not been tested and may require optimization of memory handling and database indexing.
+
+- **Normalization Trade-offs**:  
+    The schema is normalized to reduce redundancy, but highly normalized schemas can sometimes lead to more complex queries and slower performance in certain analytics workflows. Denormalization strategies may be considered depending on usage needs.
 
 ---
 
