@@ -351,9 +351,10 @@ For example:
 
 ## Usage Notes & Tips
 
-- Update file paths if moving files.
-- Enhance the schema with constraints as needed.
-- Run `schema_writer.ipynb` for easy PostgreSQL file uploading.
+- **Path Fixes**: You can update file paths if moving files, however files are organized for clean runs
+- **Manual Editing**: You can manually revise `crowdfunding_db_schema.sql` if you need additional constraints like `PRIMARY KEY` or `FOREIGN KEY`.
+- **Enhancement**: Run `schema_writer.ipynb` for easy PostgreSQL file uploading, ignore the extra `RAW_autoSchema.sql` file that comes with it.
+- **Optional Tools**: The `schema_writer.ipynb` and the import script are purely optional. They demonstrate an automated approach but aren’t required per the rubric.
 
 [:arrow_up: Return to TOC](#table-of-contents)  
 
