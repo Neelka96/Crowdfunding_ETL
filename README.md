@@ -19,7 +19,16 @@ By:
 4. [System Requirements](#system-requirements)
 5. [Installation & Setup](#installation--setup)
 6. [ETL Process](#etl-process)
-7. [Schema Creation & (Optional) Data Import](#schema-creation--optional-data-import)
+    - [Extraction](#1-extraction)
+    - [Transformation](#2-transformation)
+    - [Loading](#3-loading)
+7. [Schema Creation & Data Import](#schema-creation--data-import)
+    - [Example Table Creation](#example-table-creation)
+        + [RAW_autoSchema](#raw_autoschema)
+        + [crowdfunding_db_schema](#crowdfunding_db_schema)
+    - [Example Import](#example-import)
+        + [Using Bulk Imports](#using-bulk-imports)
+        + [Using PSQL/SQL Shell](#using-psqlsql-shell)
 8. [Regex Approach (Optional)](#regex-approach-optional)
 9. [ERD Overview](#erd-overview)
 10. [Usage Notes & Tips](#usage-notes--tips)
@@ -173,7 +182,7 @@ While the basic requirements for this Project specify the inclusion of a schema 
 
 ---
 
-## Schema Creation & (Optional) Data Import  
+## Schema Creation & Data Import  
 
 > [!NOTE]  
 > The `VARCHAR` lengths for variable fields (like `first_name`, `last_name`, `email`, `company_name`, and `description`) were determined by the maximum string lengths from the dataset. These lengths were **manually rounded up** to accommodate longer entries in future datasets, preventing any data truncation issues.  
@@ -231,7 +240,11 @@ CREATE TABLE campaign (
 );
 ```
 
-### Example Import (Optional)
+### Example Import
+> [!NOTE]  
+> Importing can be happily done using the GUI, but other options have been provided! Please run all cells in `schema_writer.ipynb` for a auto generated SQL Import file called `crowdfunding_db_import.sql`.
+
+#### Using Bulk-Imports
 ```sql
 COPY 
     campaign
@@ -240,10 +253,10 @@ FROM
 DELIMITER ',' CSV HEADER;
 ```
 
-### Usage
+### Using PSQL/SQL Shell
 ```sql
-\i crowdfunding_db_schema.sql
 -- Optional:
+\i crowdfunding_db_schema.sql
 \i crowdfunding_db_import.sql
 ```
 
