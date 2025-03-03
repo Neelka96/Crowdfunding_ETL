@@ -345,13 +345,15 @@ For example:
 - **Normalization Trade-offs**:  
     The schema is normalized to reduce redundancy, but highly normalized schemas can sometimes lead to more complex queries and slower performance in certain analytics workflows. Denormalization strategies may be considered depending on usage needs.
 
+[:arrow_up: Return to TOC](#table-of-contents)  
+
 ---
 
 ## Usage Notes & Tips
 
 - Update file paths if moving files.
 - Enhance the schema with constraints as needed.
-- Regenerate schema with `schema_writer.ipynb` if CSV structures change.
+- Run `schema_writer.ipynb` for easy PostgreSQL file uploading.
 
 [:arrow_up: Return to TOC](#table-of-contents)  
 
