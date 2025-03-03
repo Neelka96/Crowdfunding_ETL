@@ -31,6 +31,8 @@ By:
         + [Using PSQL/SQL Shell](#using-psqlsql-shell)
 8. [Regex Approach (Optional)](#regex-approach-optional)
 9. [ERD Overview](#erd-overview)
+    - [Normalization](#normalization)
+    - [Relationships](#relationships)
 10. [Usage Notes & Tips](#usage-notes--tips)
 11. [Credits & Citations](#credits--citations)
 
@@ -59,6 +61,8 @@ According to the project rubric, the following are required:
 ### Optional Enhancements  
 - **`schema_writer.ipynb`**: Automatically generates rough-draft SQL schema and fully-functional import statements to bulk upload CSV Files
 - **`crowdfunding_db_import.sql`**: Optional script to bulk-load CSVs into the database using `COPY` commands. <ins>Not part of repo, but generated SQL code that comes from `schema_writer.ipynb` when all cells are run.</ins>
+
+[:arrow_up: Return to TOC](#table-of-contents)  
 
 ---
 
@@ -91,6 +95,8 @@ Crowdfunding_ETL/
 └── README.md
 ```
 
+[:arrow_up: Return to TOC](#table-of-contents)  
+
 ---
 
 ## System Requirements
@@ -113,6 +119,8 @@ To successfully run this project, the following environment is recommended:
 - **Memory (RAM)**: Minimum 4 GB recommended
 
 Ensure PostgreSQL is installed and running before executing the SQL scripts.
+
+[:arrow_up: Return to TOC](#table-of-contents)  
 
 ---
 
@@ -141,7 +149,10 @@ Ensure PostgreSQL is installed and running before executing the SQL scripts.
 4. Now you're ready to move to the Jupyter Notebook view!
 
 > [!TIP]  
-> As you might've gathered, a helper filer to automate SQL code was written. It has the ability to generate a SQL file to bulk-upload CSV type files. Feel free to upload in any way that is easiest, but to create this file please run all cells in `schema_writer.ipynb`. 
+> As you might've gathered, a helper filer to automate SQL code was written. It has the ability to generate a SQL file to bulk-upload CSV type files. Feel free to upload in any way that is easiest, but to create this file please run all cells in `schema_writer.ipynb`.  
+
+[:arrow_up: Return to TOC](#table-of-contents)  
+
 ---
 
 ## ETL Process
@@ -179,6 +190,8 @@ Create four CSVs: `campaign.csv`, `contacts.csv`, `category.csv`, `subcategory.c
     - Open `schema_writer.ipynb` and run all cells. Afterwards a `crowdfunding_db_import.sql` file can be found which can bulk-import CSV when run in pgAdmin 4.
 
 While the basic requirements for this Project specify the inclusion of a schema file, the process of converting a pandas DataFrame into PostgreSQL Schema can be arduous and error-prone, so a helper notebook file was written to do most of the heavy lifting and data validation. Constraint edting, rounding up VARCHARs, and fixing DATE type in particular were done after the automatic building of the schema file. However, the bulk-imports that come from this helper file are fine to use if not even easier!
+
+[:arrow_up: Return to TOC](#table-of-contents)  
 
 ---
 
@@ -260,6 +273,8 @@ DELIMITER ',' CSV HEADER;
 \i crowdfunding_db_import.sql
 ```
 
+[:arrow_up: Return to TOC](#table-of-contents)  
+
 ---
 
 ## Regex Approach (Optional)
@@ -279,6 +294,8 @@ for row in contact_info_df['raw_data_column']:
     found_email = re.search(pattern_email, row).group(1)
     found_name = re.search(pattern_name, row).group()
 ```
+
+[:arrow_up: Return to TOC](#table-of-contents)  
 
 ---
 
@@ -302,6 +319,8 @@ For example:
 - `campaign.category_id` → `category.category_id`
 - `campaign.subcategory_id` → `subcategory.subcategory_id`
 
+[:arrow_up: Return to TOC](#table-of-contents)  
+
 ---
 
 ## Usage Notes & Tips
@@ -309,6 +328,8 @@ For example:
 - Update file paths if moving files.
 - Enhance the schema with constraints as needed.
 - Regenerate schema with `schema_writer.ipynb` if CSV structures change.
+
+[:arrow_up: Return to TOC](#table-of-contents)  
 
 ---
 
@@ -323,5 +344,7 @@ For example:
 3. **README.md**: Created using OpenAI's [ChatGPT LLM](https://www.chatgpt.com), trained using prior READMEs, all the deliverables, and the provided rubric given by edX/2U  
 4. **PostgreSQL Docs**: [postgresql.org/docs](https://www.postgresql.org/docs/)
 5. **pandas Docs**: [pandas.pydata.org/docs](https://pandas.pydata.org/docs)
+
+[:arrow_up: Return to TOC](#table-of-contents)  
 
 ---
