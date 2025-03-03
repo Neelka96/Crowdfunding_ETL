@@ -199,6 +199,7 @@ While the basic requirements for this Project specify the inclusion of a schema 
 ### Example Table Creation  
 
 #### RAW_autoSchema
+Note the lack of Primary and Foreign Key declarations as well as correcting `description` to be enclosed with double-quotes ("") to ensure it's read properly as a column name and not as a keyword. This is an example of the auto-generated SQL code created as a proof-of-concept, to speed up schema creation, and to ensure it's done with errors.  
 ```sql
 CREATE TABLE campaign (
     cf_id INT
@@ -219,6 +220,7 @@ CREATE TABLE campaign (
 ```
 
 #### crowdfunding_db_schema
+This is a snipped of the finalized schema code, after final edits have taken place. Keys are now declared properly, some VARCHARS have been rounded-up (albeit they could've been rounded up even more since they're personal identification materials), and `launch_date` and `end_date` have been changed to PostgreSQL DATE type.  
 ```sql
 CREATE TABLE campaign (
     cf_id INT
