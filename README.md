@@ -24,11 +24,7 @@ By:
     - [Loading](#3-loading)
 7. [Schema Creation & Data Import](#schema-creation--data-import)
     - [Example Table Creation](#example-table-creation)
-        + [RAW_autoSchema](#raw_autoschema)
-        + [crowdfunding_db_schema](#crowdfunding_db_schema)
     - [Example Import](#example-import)
-        + [Using Bulk Imports](#using-bulk-imports)
-        + [Using PSQL/SQL Shell](#using-psqlsql-shell)
 8. [Regex Approach (Optional)](#regex-approach-optional)
 9. [ERD Overview](#erd-overview)
     - [Normalization](#normalization)
@@ -266,7 +262,7 @@ FROM
 DELIMITER ',' CSV HEADER;
 ```
 
-### Using PSQL/SQL Shell
+#### Using PSQL/SQL Shell
 ```sql
 -- Optional:
 \i crowdfunding_db_schema.sql
