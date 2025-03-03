@@ -3,10 +3,10 @@
 `EdX(2U) & UT Data Analytics and Visualization Bootcamp`  
 `Cohort UTA-VIRT-DATA-PT-11-2024-U-LOLC`  
 By:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Manny Guevara**,  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Neel Agarwal**,  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Rob LaPreze**,  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Samora Machel**  
+&nbsp;&nbsp;&nbsp;&nbsp;**Manny Guevara**  
+&nbsp;&nbsp;&nbsp;&nbsp;**Neel Agarwal**  
+&nbsp;&nbsp;&nbsp;&nbsp;**Rob LaPreze**  
+&nbsp;&nbsp;&nbsp;&nbsp;**Samora Machel**  
 
 ---
 
@@ -14,7 +14,8 @@ By:
 1. [Project Overview](#project-overview)
 2. [Deliverables](#deliverables)
     - [Required Files](#required-files)
-    - [Optional Enhancements](#optional-enhancements)
+    - [Optional Enhancements](#optional-enhancements)  
+    - [RAW_autoSchema.sql Clarification](#raw_autoschemasql-clarification)
 3. [Directory Structure](#directory-structure)
 4. [System Requirements](#system-requirements)
 5. [Installation & Setup](#installation--setup)
@@ -29,9 +30,10 @@ By:
 9. [ERD Overview](#erd-overview)
     - [Normalization](#normalization)
     - [Relationships](#relationships)
-10. [Limitations](#limitations)
-11. [Usage Notes & Tips](#usage-notes--tips)
-12. [Credits & Citations](#credits--citations)
+10. [Limitations](#limitations)  
+11. [Future Work](#future-work)
+12. [Usage Notes & Tips](#usage-notes--tips)
+13. [Credits & Citations](#credits--citations)
 
 ---
 
@@ -57,7 +59,11 @@ According to the project rubric, the following are required:
 
 ### Optional Enhancements  
 - **`schema_writer.ipynb`**: Automatically generates rough-draft SQL schema and fully-functional import statements to bulk upload CSV Files
-- **`crowdfunding_db_import.sql`**: Optional script to bulk-load CSVs into the database using `COPY` commands. <ins>Not part of repo, but generated SQL code that comes from `schema_writer.ipynb` when all cells are run.</ins>
+- **`crowdfunding_db_import.sql`**: Optional script to bulk-load CSVs into the database using `COPY` commands. <ins>Not part of repo, but generated SQL code that comes from `schema_writer.ipynb` when all cells are run.</ins>  
+
+### RAW_autoSchema.sql Clarification  
+**RAW_autoSchema.sql**:  
+*(Generated, NOT FOR USE)* – Referring to the below directory structure, this file represents an unrefined, preliminary version of the schema automatically produced before manual corrections. It lacks necessary constraints, proper `VARCHAR` lengths, and tailored adjustments. It remains in the repository for historical and development reference only.  
 
 [:arrow_up: Return to TOC](#table-of-contents)  
 
@@ -200,7 +206,7 @@ While the basic requirements for this Project specify the inclusion of a schema 
 ### Example Table Creation  
 
 #### RAW_autoSchema
-Note the lack of Primary and Foreign Key declarations as well as correcting `description` to be enclosed with double-quotes ("") to ensure it's read properly as a column name and not as a keyword. This is an example of the auto-generated SQL code created as a proof-of-concept, to speed up schema creation, and to ensure it's done with errors.  
+Note the lack of Primary and Foreign Key declarations as well as correcting `description` to be enclosed with double-quotes ("") to ensure it's read properly as a column name and not as a keyword. This is an example of the auto-generated SQL code created as a proof-of-concept, to speed up schema creation, and to ensure it's done with errors. For more information on Raw_autoSchema please [click here](#raw_autoschemasql-clarification).  
 ```sql
 CREATE TABLE campaign (
     cf_id INT
@@ -324,11 +330,11 @@ For example:
 
 ## Limitations
 
-- **Static Data Structure**:  
-    The current schema and CSV outputs are designed around the provided datasets. While precautions like rounding up `VARCHAR` lengths were taken, future datasets with unexpected structures, additional fields, or significantly longer strings may require manual updates to the schema and ETL process.
+- **`VARCHAR` Length Sensitivity**:  
+    While the maximum observed string lengths in the dataset were manually rounded up to define `VARCHAR` limits for fields like `first_name`, `last_name`, `email`, `company_name`, and `description`, future datasets with significantly longer values may require further schema modifications to avoid truncation.
 
 - **Manual Schema Refinements**:  
-    Although the `schema_writer.ipynb` automates SQL generation, elements like primary keys, foreign keys, and certain constraints were applied manually or outside the automated process. Future iterations could integrate these features directly into the schema generator.
+    Although the `schema_writer.ipynb` automates SQL generation, elements like primary and foreign keys, certain constraints like `NOT NULL`, and buffers for VARCHAR were applied manually or outside the automated process. Future iterations could integrate these features directly into the schema generator.
 
 - **Limited Data Validation**:  
     The ETL process performs cleaning and transformation, but deeper validation (such as checking for duplicate records, malformed emails, or invalid date ranges) is minimal. Adding robust data validation steps could help ensure higher data quality.
@@ -344,6 +350,17 @@ For example:
 
 - **Normalization Trade-offs**:  
     The schema is normalized to reduce redundancy, but highly normalized schemas can sometimes lead to more complex queries and slower performance in certain analytics workflows. Denormalization strategies may be considered depending on usage needs.
+
+[:arrow_up: Return to TOC](#table-of-contents)  
+
+---
+
+## Future Work  
+
+- Automate the inclusion of schema constraints (primary/foreign keys, uniqueness) directly within `schema_writer.ipynb`.
+- Introduce enhanced validation during the ETL process (such as email pattern checks, duplicate detection, and date validations).
+- Add support for dynamic file path handling in the SQL import script to improve cross-system portability.
+- Explore potential denormalization strategies to optimize read-heavy workloads and large-scale reporting.
 
 [:arrow_up: Return to TOC](#table-of-contents)  
 
