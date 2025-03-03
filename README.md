@@ -63,7 +63,8 @@ Crowdfunding_ETL/
 │   │   ├── crowdfunding_db_schema.sql (Required)
 │   │   └── ETL_FINAL.ipynb (Required)
 │   └── Extras/
-│       ├── crowdfunding_db_import.sql (Optional)
+│       ├── crowdfunding_db_import.sql (Generated/Optional)
+│       ├── RAW_autoSchema.sql (Generated/NOT FOR USE)
 │       └── schema_writer.ipynb (Optional)
 │
 ├── Resources/
@@ -129,7 +130,9 @@ Ensure PostgreSQL is installed and running before executing the SQL scripts.
     deactivate                      # Deactivate your virtual env
     ```
 4. Now you're ready to move to the Jupyter Notebook view!
-5. One last note, a helper filer to automate your ability to bulk-upload files has been written and can be used at your discretion. Please generate files using `schema_writer.ipynb`. 
+
+> [!TIP]  
+> As you might've gathered, a helper filer to automate SQL code was written. It has the ability to generate a SQL file to bulk-upload CSV type files. Feel free to upload in any way that is easiest, but to create this file please run all cells in `schema_writer.ipynb`. 
 ---
 
 ## ETL Process
