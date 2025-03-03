@@ -34,9 +34,9 @@ This project is designed to showcase an end-to-end **Extract, Transform, and Loa
 The objectives of this project are:
 1. **Extract** crowdfunding data from provided Excel spreadsheets.
 2. **Transform** and clean the data into a relational database-friendly format.
-3. **Load** the cleaned data into a PostgreSQL database using custom SQL scripts.
+3. **Load** the cleaned data into a PostgreSQL database using SQL scripts.
 
-The project emphasizes reproducibility and scalability by providing optional automation through notebook-driven SQL generation, all while fulfilling the assignment rubric. It avoids GUI-based imports (like pgAdmin's CSV import tool) to maintain cross-environment compatibility.
+The project emphasizes reproducibility and scalability by providing optional automation through notebook-driven SQL generation, all while fulfilling the assignment rubric. It avoids GUI-based imports (like pgAdmin's CSV import tool) to maintain cross-environment compatibility, even though doing so would be a reasonable option as well.
 
 ---
 
@@ -129,7 +129,7 @@ Ensure PostgreSQL is installed and running before executing the SQL scripts.
     deactivate                      # Deactivate your virtual env
     ```
 4. Now you're ready to move to the Jupyter Notebook view!
-5. One last note, a helper filer to automate your ability to bulk-upload files has been written and can be used at your discretion. Please generate one using `schema_writer.ipynb`. 
+5. One last note, a helper filer to automate your ability to bulk-upload files has been written and can be used at your discretion. Please generate files using `schema_writer.ipynb`. 
 ---
 
 ## ETL Process
@@ -159,14 +159,14 @@ Create four CSVs: `campaign.csv`, `contacts.csv`, `category.csv`, `subcategory.c
 
 
 ### 3. Loading
-The actual process of loading can be done in a multitude of ways. While the basic requirements for this Project specify the inclusion of a schema file, the process of converting a pandas DataFrame into PostgreSQL Schema can be arduous and error-prone, so a helper notebook file was written to do most of the heavy lifting and data validation. Constraint edting, rounding up VARCHARs, and fixing DATE type in particular were done after the automatic building of the schema file. However,  
-
 - Create/connect to `crowdfunding_db` in PostgreSQL
 - Add Schema into db using `crowdfunding_db_schema.sql`.
 - Load data into db:
     - Using PostgreSQL's importing tool in the pgAdmin GUI
     - Using psql
     - Open `schema_writer.ipynb` and run all cells. Afterwards a `crowdfunding_db_import.sql` file can be found which can bulk-import CSV when run in pgAdmin 4.
+
+While the basic requirements for this Project specify the inclusion of a schema file, the process of converting a pandas DataFrame into PostgreSQL Schema can be arduous and error-prone, so a helper notebook file was written to do most of the heavy lifting and data validation. Constraint edting, rounding up VARCHARs, and fixing DATE type in particular were done after the automatic building of the schema file. However, the bulk-imports that come from this helper file are fine to use if not even easier!
 
 ---
 
