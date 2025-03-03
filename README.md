@@ -271,7 +271,7 @@ for row in contact_info_df['raw_data_column']:
 
 ## ERD Overview
 
-<img src="../ERD.jpg" alt="ERD_JPEG" width="1000"/>
+<img src="ERD.jpg" alt="ERD_JPEG" width="1000"/>
 
 ### Normalization:
 
