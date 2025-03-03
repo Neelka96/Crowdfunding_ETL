@@ -1,10 +1,10 @@
 # MacOS Directory Config Files
 .DS_Store
 
-# Helper Constraints File
+# Helper Files
 schema_constraints.sql
-TEST_autoSchema.sql
-TEST_autoImport.sql
+RAW_autoSchema.sql
+crowdfunding_db_import.sql
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
