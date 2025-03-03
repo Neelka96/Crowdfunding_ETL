@@ -8,10 +8,13 @@ By:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Rob LaPreze**,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Samora Machel**  
 
+---
 
 ## Table of Contents
 1. [Project Overview](#project-overview)
-2. [Required Deliverables](#required-deliverables)
+2. [Deliverables](#deliverables)
+    - [Required Files](#required-files)
+    - [Optional Enhancements](#optional-enhancements)
 3. [Directory Structure](#directory-structure)
 4. [System Requirements](#system-requirements)
 5. [Installation & Setup](#installation--setup)
@@ -24,7 +27,7 @@ By:
 
 ---
 
-## Project Overview
+## Project Overview  
 
 This project is designed to showcase an end-to-end **Extract, Transform, and Load (ETL)** process for crowdfunding campaign data as part of the edX/2U Data Analytics Bootcamp.
 
@@ -37,16 +40,16 @@ The project emphasizes reproducibility and scalability by providing optional aut
 
 ---
 
-## Required Deliverables
+## Deliverables  
+### Required Files  
+According to the project rubric, the following are required:  
+- **`ETL_FINAL.ipynb`**: The main notebook that handles extraction, transformation, and CSV creation.  
+- **`crowdfunding_db_schema.sql`**: Defines the database schema for the transformed data.  
+- **`ERD.jpg`**: Visual representation of the Entity Relationship Diagram (ERD) of the database.  
 
-According to the project rubric, the following are required:
-- **`ETL_FINAL.ipynb`**: The main notebook that handles extraction, transformation, and CSV creation.
-- **`crowdfunding_db_schema.sql`**: Defines the database schema for the transformed data.
-- **`ERD.jpg`**: Visual representation of the Entity Relationship Diagram (ERD) of the database.
-
-### Optional Enhancements:
-- **`schema_writer.ipynb`**: Automatically generates SQL schema and import statements.
-- **`crowdfunding_db_import.sql`**: Optional script to bulk-load CSVs into the database using `COPY` commands.
+### Optional Enhancements  
+- **`schema_writer.ipynb`**: Automatically generates rough-draft SQL schema but fully functional import statements.
+- **`crowdfunding_db_import.sql`**: Optional script to bulk-load CSVs into the database using `COPY` commands. Full functioning when updated by running all cells in schema_writer.ipynb
 
 ---
 
@@ -88,21 +91,16 @@ To successfully run this project, the following environment is recommended:
 - **Python Version**: 3.9 or higher
 - **PostgreSQL**: Version 13 or higher
 - **Required Python Libraries**:
-  - `pandas`
-  - `numpy`
-  - `pathlib` (built-in)
-  - `re` (built-in)
-  - `json` (built-in)
-  - `datetime` (built-in)
+    - `pandas`
+    - `numpy`
+    - `pathlib` (built-in)
+    - `re` (built-in)
+    - `json` (built-in)
+    - `datetime` (built-in)
 - **Jupyter Notebook**: For running `.ipynb` files (install via `pip install notebook` if needed)
 - **PostgreSQL GUI (optional)**: pgAdmin 4 or any compatible interface
 - **Disk Space**: Minimum 500 MB free
 - **Memory (RAM)**: Minimum 4 GB recommended
-
-### Installation Summary
-```bash
-pip install pandas numpy notebook
-```
 
 Ensure PostgreSQL is installed and running before executing the SQL scripts.
 
@@ -112,68 +110,131 @@ Ensure PostgreSQL is installed and running before executing the SQL scripts.
 
 1. **Clone or download** this repository.
 2. Ensure you have **Python 3.x** installed with **pandas**:
-   ```bash
-   pip install pandas
-   ```
+    ```bash
+    pip install pandas numpy 
+    # You should have ipykernel already, if not, install it
+    pip install ipykernel
+    ```
 3. (Optional) Set up a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # Mac/Linux
-   venv\Scripts\activate     # Windows
+    ```bash
+    cd YOUR/PATH/TO/REPO/HERE       # Move to your local repo
 
-   
-   ```
+    python -m venv venv             # Create a new virtual env
 
+    source venv/bin/activate        # Mac/Linux or with
+    venv\Scripts\activate           # Windows
+
+    pip install requirements.txt    # Install logged dependencies
+
+    deactivate                      # Deactivate your virtual env
+    ```
+4. Now you're ready to move to the Jupyter Notebook view!
+5. One last note, a helper filer to automate your ability to bulk-upload files has been written and can be used at your discretion. Please generate one using `schema_writer.ipynb`. 
 ---
 
 ## ETL Process
 
 ### 1. Extraction
-- Read `crowdfunding.xlsx` and `contacts.xlsx`.
-- Clean the datasets by removing unnecessary columns and standardizing data types.
+- Decide on most efficient python based ETL tool.
+- Install dependencies.
+- Setup DataFrames so large rows of data can be read on-screen.
+- Read in `crowdfunding.xlsx` and `contacts.xlsx` as DataFrames.  
+- Quick look at data values, types, and structure before transformation to grasp what kind of database is being built. 
 
 ### 2. Transformation
-- Split `"category & sub-category"` into separate `"category"` and `"subcategory"`.
-- Create four CSVs: `campaign.csv`, `contacts.csv`, `category.csv`, `subcategory.csv`.
+Create four CSVs: `campaign.csv`, `contacts.csv`, `category.csv`, `subcategory.csv` by cleaning, editing, and normalizing data.  
+- Split `"category & sub-category"` into separate `"category"` and `"subcategory"`:
+    + `crowdfunding.xlsx` hold combined info that needed to be methodically separated
+    + Create new identifiers for each entry in new tables to be linked with main table
+    + Move into one new table for each along with unique identifiers
+- Clean the `crowdfunding` (main) DataFrame and perform major edits:  
+    + removing unnecessary sets from tables  
+    + renaming/reordering columns to be more informative and match conventions  
+    + merging to insert foreign key designations
+    + standardizing data types for pandas ETL and SQL Schema  
+- Mitigate bad input formatting to allow `contacts.xlsx` to be usable  
+    + Select one of two methods to parse through the DataFrame created from `contacts.xlsx` (Pandas or Regular Expressions)
+    + While both methods were completed for learning's sake and to measure efficiency, the Pandas method was selected for said reasoning.
+    + Original Data was stored incorrectly using dictionary i.e. {} curly-brackets within excel, rendering the data unreadable by normal means.
+
 
 ### 3. Loading
-- Load CSVs into PostgreSQL using `crowdfunding_db_schema.sql`.
-- Optionally load data via `crowdfunding_db_import.sql`.
+The actual process of loading can be done in a multitude of ways. While the basic requirements for this Project specify the inclusion of a schema file, the process of converting a pandas DataFrame into PostgreSQL Schema can be arduous and error-prone, so a helper notebook file was written to do most of the heavy lifting and data validation. Constraint edting, rounding up VARCHARs, and fixing DATE type in particular were done after the automatic building of SQL files. 
+
+- Create/connect to `crowdfunding_db` in PostgreSQL
+- Add Schema into db using `crowdfunding_db_schema.sql`.
+- Load data into db:
+    - Using PostgreSQL's importing tool in the pgAdmin GUI
+    - Using psql
+    - Opening `crowdfunding_db_import.sql` and running (If so, please use the file generated from `schema_writer.ipynb` to import as it will have corrected paths just for you)
 
 ---
 
-## Schema Creation & (Optional) Data Import
+## Schema Creation & (Optional) Data Import  
 
-### Note on VARCHAR Lengths:
+> [!NOTE]  
+> The `VARCHAR` lengths for variable fields (like `first_name`, `last_name`, `email`, `company_name`, and `description`) were determined by the maximum string lengths from the dataset. These lengths were **manually rounded up** to accommodate longer entries in future datasets, preventing any data truncation issues.  
 
-The `VARCHAR` lengths for variable fields (like `first_name`, `last_name`, `email`, `company_name`, and `description`) were determined by the maximum string lengths from the dataset. These lengths were **manually rounded up** to accommodate longer entries in future datasets, preventing any data truncation issues.
+### Example Table Creation  
 
-### Example Table Creation
+#### Via schema_writer
 ```sql
 CREATE TABLE campaign (
-    cf_id CHAR(5) NOT NULL,
-    contact_id INT NOT NULL,
-    company_name VARCHAR(60),
-    description VARCHAR(60),
-    goal DEC,
-    pledged DEC,
-    outcome VARCHAR(10),
-    backers_count INT,
-    country CHAR(2),
-    currency CHAR(3),
-    launch_date DATE,
-    end_date DATE,
-    category_id CHAR(4),
-    subcategory_id VARCHAR(8)
+    cf_id INT
+    ,contact_id INT 
+    ,company_name VARCHAR(33) NOT NULL
+    ,description VARCHAR(53) 
+    ,goal DEC NOT NULL
+    ,pledged DEC NOT NULL
+    ,outcome VARCHAR(10) NOT NULL
+    ,backers_count INT NOT NULL
+    ,country CHAR(2) NOT NULL
+    ,currency CHAR(3) NOT NULL
+    ,launch_date CHAR(10) NOT NULL
+    ,end_date CHAR(10) 
+    ,category_id CHAR(4) 
+    ,subcategory_id VARCHAR(8) 
+);
+```
+
+#### Adding Key Constraints & Minor Adjustments
+```sql
+CREATE TABLE campaign (
+    cf_id INT
+    ,contact_id INT 
+    ,company_name VARCHAR(40) NOT NULL
+    ,"description" VARCHAR(60)
+    ,goal DEC NOT NULL
+    ,pledged DEC NOT NULL
+    ,outcome VARCHAR(10) NOT NULL
+    ,backers_count INT NOT NULL
+    ,country CHAR(2) NOT NULL
+    ,currency CHAR(3) NOT NULL
+    ,launch_date DATE NOT NULL
+    ,end_date DATE
+    ,category_id CHAR(4) 
+    ,subcategory_id VARCHAR(8) 
+    ,CONSTRAINT pk_cf_id 
+        PRIMARY KEY (cf_id)
+    ,CONSTRAINT fk_contact_id 
+        FOREIGN KEY (contact_id) 
+        REFERENCES contacts(contact_id)
+    ,CONSTRAINT fk_cat_id 
+        FOREIGN KEY (category_id) 
+        REFERENCES category(category_id)
+    ,CONSTRAINT fk_subcat_id 
+        FOREIGN KEY (subcategory_id) 
+        REFERENCES subcategory(subcategory_id)
 );
 ```
 
 ### Example Import (Optional)
 ```sql
-COPY campaign
-FROM '/your/local/path/Resources/Output/campaign.csv'
-DELIMITER ','
-CSV HEADER;
+COPY 
+    campaign
+FROM 
+    '/your/local/path/Resources/Output/campaign.csv'
+DELIMITER ',' CSV HEADER;
 ```
 
 ### Usage
@@ -237,14 +298,14 @@ For example:
 
 ## Credits & Citations
 
-1. **Author**: _[Your Name]_ - UT/edX/2U Data Analytics Bootcamp, Project 2.
-2. **Starter Code & Data**: Provided by **edX/2U**.
-3. **ChatGPT**: Assisted in README drafting.
+1. **Collaborators**:  
+    - *Manny Guevara*  
+    - *Neel Agarwal*  
+    - *Rob LaPreze*  
+    - *Samora Machel*  
+2. **Starter Code & Data**: Provided by **UT/edX/2U Data Analytics Bootcamp**.
+3. **README.md**: Created using OpenAI's [ChatGPT LLM](https://www.chatgpt.com), trained using prior READMEs, all the deliverables, and the provided rubric given by edX/2U  
 4. **PostgreSQL Docs**: [postgresql.org/docs](https://www.postgresql.org/docs/)
 5. **pandas Docs**: [pandas.pydata.org/docs](https://pandas.pydata.org/docs)
-
----
-
-Thank you for exploring the Crowdfunding ETL project! Contributions and feedback are welcome.
 
 ---
